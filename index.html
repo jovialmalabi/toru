@@ -30,13 +30,6 @@
             object-fit: contain;
         }
 
-        /* Fullscreen adjustments */
-        .plyr--fullscreen .video-container {
-            width: 100vw;
-            height: 100vh;
-            aspect-ratio: initial;
-        }
-
         @media (max-width: 600px) {
             .video-container {
                 width: 100%;
@@ -83,20 +76,28 @@
         // Detect if the device is iOS
         const isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
-        // Function to toggle between Plyr and iOS fullscreen
-        function toggleFullscreen() {
-            if (isIOS) {
-                const videoElement = document.getElementById('player');
-                videoElement.webkitEnterFullscreen();  // Use the built-in fullscreen mode for iOS
-            } else {
-                player.fullscreen.toggle();  // Use Plyr's fullscreen mode for other devices
+        // Function to enable native iOS fullscreen
+        function toggleIOSFullscreen() {
+            const videoElement = document.getElementById('player');
+            if (videoElement && isIOS) {
+                videoElement.webkitEnterFullscreen();  // Use native iOS fullscreen
             }
         }
 
-        // Listen for keyboard shortcuts and fullscreen changes
+        // Disable Plyr fullscreen on iOS and use native fullscreen
+        document.addEventListener('touchend', (event) => {
+            if (isIOS) {
+                toggleIOSFullscreen();  // Open native fullscreen on iOS
+                event.preventDefault();  // Prevent Plyr from handling fullscreen
+            }
+        });
+
+        // Keyboard shortcuts for desktop controls
         document.addEventListener('keydown', (event) => {
             if (event.key === 'f' || event.key === 'F') {
-                toggleFullscreen();
+                if (!isIOS) {
+                    player.fullscreen.toggle();  // Non-iOS devices use Plyr's fullscreen
+                }
             }
             if (event.key === ' ') {
                 if (player.playing) {
@@ -104,14 +105,6 @@
                 } else {
                     player.play();
                 }
-            }
-        });
-
-        // Event listener for fullscreenchange to handle fullscreen toggling on iOS
-        document.addEventListener('fullscreenchange', () => {
-            if (isIOS && !document.fullscreenElement) {
-                const videoElement = document.getElementById('player');
-                videoElement.webkitEnterFullscreen();
             }
         });
     </script>

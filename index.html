@@ -2,111 +2,78 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Видео плеер на русском</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css" />
+    <title>ВНИМАНИЕ!</title>
     <style>
+        /* Предыдущие стили остаются без изменений */
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
+            background-color: black;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
+            margin: 0;
+            overflow: hidden;
         }
 
-        .video-container {
-            width: 80%;
-            max-width: 1280px;
-            aspect-ratio: 16/9;
-            background-color: #000;
-            position: relative;
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            text-shadow: 0 0 10px #0f0;
+            animation: blink 1s infinite;
         }
 
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .info {
+            font-size: 1.5em;
+            margin: 20px;
+            padding: 15px;
+            border: 2px solid #0f0;
         }
 
-        @media (max-width: 600px) {
-            .video-container {
-                width: 100%;
-                aspect-ratio: 16/9;
-            }
+        @keyframes blink {
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
-
-    <div class="video-container">
-        <video id="player" playsinline controls>
-            <source src="https://video1.anilib.me/.%D0%B0s//uploads/converted_videos/anime/22112/players/65806/d5d257f0-09b0-400f-9e8d-6068c583cde8_1080.mp4" size="1080" type="video/mp4">
-            <source src="https://video1.anilib.me/.%D0%B0s//uploads/converted_videos/anime/22112/players/65806/d5d257f0-09b0-400f-9e8d-6068c583cde8_720.mp4" size="720" type="video/mp4">
-            <source src="https://video1.anilib.me/.%D0%B0s//uploads/converted_videos/anime/22112/players/65806/d5d257f0-09b0-400f-9e8d-6068c583cde8_480.mp4" size="480" type="video/mp4">
-            Ваш браузер не поддерживает тег video.
-        </video>
+    <h1>ТЕБЯ ВЗЛОМАЛИ!</h1>
+    <div class="info">
+        <p>Твой IP: <span id="ip">загрузка...</span></p>
+        <p>Местоположение: <span id="location">определение...</span></p>
+        <p>Устройство: <span id="device">анализ...</span></p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.polyfilled.min.js"></script>
+    <!-- Добавляем библиотеку для парсинга User-Agent -->
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.2/src/ua-parser.min.js"></script>
+    
     <script>
-        // Initialize the Plyr player with Russian translations
-        const player = new Plyr('#player', {
-            settings: ['quality', 'speed'],
-            controls: ['play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
-            speed: { selected: 1, options: [0.5, 1, 1.5, 2] },
-            quality: { default: 1080, options: [480, 720, 1080] },
-            i18n: {
-                speed: 'Скорость',
-                quality: 'Качество',
-                play: 'Воспроизведение',
-                pause: 'Пауза',
-                mute: 'Выключить звук',
-                unmute: 'Включить звук',
-                captions: 'Субтитры',
-                settings: 'Настройки',
-                fullscreen: 'Полный экран',
-                exitFullscreen: 'Выйти из полноэкранного режима',
-                currentTime: 'Текущее время',
-                duration: 'Длительность',
-            }
-        });
-
-        // Detect if the device is iOS
-        const isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-
-        // Function to enable native iOS fullscreen
-        function toggleIOSFullscreen() {
-            const videoElement = document.getElementById('player');
-            if (videoElement && isIOS) {
-                videoElement.webkitEnterFullscreen();  // Use native iOS fullscreen
-            }
+        // Определение устройства
+        const parser = new UAParser();
+        const deviceInfo = parser.getResult();
+        
+        let deviceText = '';
+        if(deviceInfo.device.model) {
+            deviceText = `${deviceInfo.device.vendor} ${deviceInfo.device.model}`;
+        } else {
+            deviceText = `${deviceInfo.os.name} ${deviceInfo.os.version} (${deviceInfo.browser.name})`;
         }
+        document.getElementById('device').textContent = deviceText;
 
-        // Disable Plyr fullscreen on iOS and use native fullscreen
-        document.addEventListener('touchend', (event) => {
-            if (isIOS) {
-                toggleIOSFullscreen();  // Open native fullscreen on iOS
-                event.preventDefault();  // Prevent Plyr from handling fullscreen
-            }
-        });
-
-        // Keyboard shortcuts for desktop controls
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'f' || event.key === 'F') {
-                if (!isIOS) {
-                    player.fullscreen.toggle();  // Non-iOS devices use Plyr's fullscreen
-                }
-            }
-            if (event.key === ' ') {
-                if (player.playing) {
-                    player.pause();
-                } else {
-                    player.play();
-                }
-            }
-        });
+        // Получение IP и геолокации
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ip').textContent = data.ip;
+                document.getElementById('location').textContent = 
+                    `${data.city}, ${data.region}, ${data.country_name}`;
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                document.getElementById('ip').textContent = 'не удалось определить';
+                document.getElementById('location').textContent = 'не удалось определить';
+            });
     </script>
 </body>
 </html>

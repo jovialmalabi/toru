@@ -3,38 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium AutoParts | Профессиональный кузовной ремонт</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Premium AutoParts | Премиум запчасти и кузовной ремонт</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Arial', sans-serif;
         }
 
         :root {
-            --primary: #ff6b00;
-            --dark: #1a1a1a;
-            --light: #f4f4f4;
+            --primary: #1a1a1a;
+            --accent: #c5a47e;
+            --dark: #0d0d0d;
+            --light: #ffffff;
         }
 
         body {
-            background-color: var(--light);
+            background-color: var(--primary);
+            color: var(--light);
             line-height: 1.6;
         }
 
-        /* Header */
         .header {
-            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
+            background: rgba(13, 13, 13, 0.95);
             padding: 1rem;
             position: fixed;
             width: 100%;
+            top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -48,7 +46,8 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--primary);
+            color: var(--accent);
+            text-decoration: none;
         }
 
         .nav-links {
@@ -57,111 +56,121 @@
         }
 
         .nav-links a {
-            color: white;
+            color: var(--light);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--accent);
         }
 
-        /* Hero Section */
         .hero {
-            padding-top: 120px;
-            min-height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1920') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 70px;
         }
 
         .hero-content {
             max-width: 800px;
-            padding: 2rem;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            text-transform: uppercase;
+            color: var(--accent);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2.5rem;
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--accent), #d4b893);
             border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            color: var(--light);
+            font-weight: bold;
+            border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .cta-button:hover {
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255,107,0,0.4);
         }
 
-        /* Services Section */
         .services {
             padding: 5rem 2rem;
-            background: white;
+            background: var(--dark);
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: var(--dark);
+            color: var(--accent);
         }
 
-        .services-grid {
+        .grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .service-card {
-            background: white;
+            background: var(--primary);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
-            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .service-card:hover {
             transform: translateY(-10px);
         }
 
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
+        .service-card h3 {
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
-        /* Features Section */
-        .features {
-            background: var(--dark);
-            color: white;
+        .advantages {
             padding: 5rem 2rem;
+            background: url('https://images.unsplash.com/photo-1494976388901-8329f0b5b0d7?auto=format&fit=crop&w=1920') center/cover;
+            position: relative;
         }
 
-        .features-grid {
+        .advantages::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .advantage-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            margin-bottom: 2rem;
+        }
+
+        .catalog {
+            padding: 5rem 2rem;
+            background: var(--dark);
+        }
+
+        .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
@@ -169,79 +178,86 @@
             margin: 0 auto;
         }
 
-        .feature-item {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .feature-number {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        /* Gallery Section */
-        .gallery {
-            padding: 5rem 2rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-item {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
+        .product-card {
+            background: var(--primary);
             border-radius: 10px;
             overflow: hidden;
-            position: relative;
             transition: transform 0.3s;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.03);
+        .product-card:hover {
+            transform: translateY(-5px);
         }
 
-        /* Contact Section */
+        .product-image {
+            height: 200px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .price {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
         .contact {
-            background: var(--dark);
-            color: white;
             padding: 5rem 2rem;
+            background: var(--primary);
         }
 
-        .contact-form {
-            max-width: 600px;
+        .contact-wrapper {
+            max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        input, textarea {
+        .contact-form input,
+        .contact-form textarea {
             width: 100%;
             padding: 1rem;
-            border: none;
+            margin-bottom: 1rem;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--light);
             border-radius: 5px;
-            background: rgba(255,255,255,0.1);
-            color: white;
         }
 
-        /* Footer */
-        .footer {
-            background: #111;
-            color: white;
+        footer {
+            background: var(--dark);
             padding: 3rem 2rem;
             text-align: center;
         }
 
-        /* Mobile Styles */
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -251,22 +267,22 @@
                 font-size: 2.5rem;
             }
 
-            .services-grid {
+            .grid {
                 grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+        }
 
-            .gallery-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
             }
         }
     </style>
@@ -274,11 +290,12 @@
 <body>
     <header class="header">
         <nav class="nav-container">
-            <div class="logo">AUTO<span style="color: white;">PRO</span></div>
+            <a href="#" class="logo">PremiumAuto</a>
+            <button class="mobile-menu-btn">☰</button>
             <div class="nav-links">
                 <a href="#services">Услуги</a>
-                <a href="#about">О нас</a>
-                <a href="#gallery">Галерея</a>
+                <a href="#advantages">Преимущества</a>
+                <a href="#catalog">Каталог</a>
                 <a href="#contact">Контакты</a>
             </div>
         </nav>
@@ -286,83 +303,120 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Профессиональный кузовной ремонт</h1>
-            <p>Высококачественные услуги по ремонту и покраске автомобилей с гарантией результата</p>
-            <button class="cta-button">Записаться онлайн</button>
+            <h1>Премиум автозапчасти и кузовной ремонт</h1>
+            <p class="hero-subtitle">Оригинальные запчасти и профессиональный сервис</p>
+            <button class="btn">Записаться онлайн</button>
         </div>
     </section>
 
     <section class="services" id="services">
         <h2 class="section-title">Наши услуги</h2>
-        <div class="services-grid">
+        <div class="grid">
             <div class="service-card">
-                <i class="fas fa-car-crash service-icon"></i>
                 <h3>Кузовной ремонт</h3>
-                <p>Полное восстановление геометрии кузова после ДТП с использованием оригинальных запчастей</p>
+                <p>Полный комплекс работ по восстановлению кузова с использованием оригинальных комплектующих</p>
             </div>
             <div class="service-card">
-                <i class="fas fa-paint-roller service-icon"></i>
-                <h3>Покраска автомобиля</h3>
-                <p>Профессиональная покраска в камере с компьютерным подбором цвета</p>
+                <h3>Покраска премиум класса</h3>
+                <p>Высокотехнологичная покраска с гарантией сохранения цвета и защитой от коррозии</p>
             </div>
             <div class="service-card">
-                <i class="fas fa-tools service-icon"></i>
-                <h3>Замена стекол</h3>
-                <p>Качественная замена лобовых и боковых стекол с гарантией герметичности</p>
+                <h3>Продажа запчастей</h3>
+                <p>Оригинальные запчасти от ведущих мировых производителей с официальной гарантией</p>
             </div>
         </div>
     </section>
 
-    <section class="features">
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-number">15+</div>
-                <h4>Лет опыта</h4>
-                <p>Профессиональной работы с автомобилями</p>
+    <section class="advantages" id="advantages">
+        <div class="section-title">Наши преимущества</div>
+        <div class="grid">
+            <div class="advantage-item">
+                <h3>20 лет опыта</h3>
+                <p>Профессиональный подход к каждому клиенту</p>
             </div>
-            <div class="feature-item">
-                <div class="feature-number">5000+</div>
-                <h4>Успешных ремонтов</h4>
-                <p>Выполненных с безупречным качеством</p>
+            <div class="advantage-item">
+                <h3>Сертифицированные специалисты</h3>
+                <p>Мастера с международной квалификацией</p>
             </div>
-            <div class="feature-item">
-                <div class="feature-number">24/7</div>
-                <h4>Поддержка</h4>
-                <p>Круглосуточная помощь нашим клиентам</p>
+            <div class="advantage-item">
+                <h3>Гарантия качества</h3>
+                <p>Все работы сопровождаются официальной гарантией</p>
             </div>
         </div>
     </section>
 
-    <section class="gallery" id="gallery">
-        <h2 class="section-title">Наши работы</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
-            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
-            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
-            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
+    <section class="catalog" id="catalog">
+        <h2 class="section-title">Популярные товары</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://avatars.mds.yandex.net/i?id=5b4c65fdd21e6b8c88f33d6c29856c44_l-4282910-images-thumbs&n=13" alt="Автозапчасть">
+                </div>
+                <div class="product-info">
+                    <h3>Тормозные диски</h3>
+                    <p>Премиум комплект Brembo</p>
+                    <p class="price">45 000 ₽</p>
+                </div>
+            </div>
+            <!-- Добавьте больше товаров -->
         </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2 class="section-title">Контакты</h2>
-        <form class="contact-form">
-            <div class="form-group">
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <div class="contact-wrapper">
+            <form class="contact-form">
                 <input type="text" placeholder="Ваше имя">
+                <input type="email" placeholder="Email">
+                <textarea placeholder="Сообщение" rows="5"></textarea>
+                <button class="btn">Отправить</button>
+            </form>
+            <div class="contact-info">
+                <p>Телефон: +7 (999) 123-45-67</p>
+                <p>Адрес: Москва, ул. Автозаводская, 12</p>
             </div>
-            <div class="form-group">
-                <input type="email" placeholder="Ваш email">
-            </div>
-            <div class="form-group">
-                <textarea rows="5" placeholder="Сообщение"></textarea>
-            </div>
-            <button class="cta-button">Отправить</button>
-        </form>
+        </div>
     </section>
 
-    <footer class="footer">
-        <p>© 2024 AutoPro. Все права защищены</p>
-        <p>Телефон: +7 (999) 123-45-67</p>
-        <p>Адрес: г. Москва, ул. Автозаводская, д. 15</p>
+    <footer>
+        <a href="#" class="logo">PremiumAuto</a>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">YouTube</a>
+        </div>
+        <p>© 2024 PremiumAuto. Все права защищены</p>
     </footer>
+
+    <script>
+        // Мобильное меню
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Анимация при скролле
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.service-card, .product-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < window.innerHeight - 100) {
+                    card.style.opacity = '1';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

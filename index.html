@@ -3,51 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MangaFlow | Premium Comics Experience</title>
+    <title>Premium AutoParts | Профессиональный кузовной ремонт</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         :root {
-            --primary: #2A2A36;
-            --accent: #7B61FF;
-            --gradient: linear-gradient(135deg, #7B61FF 0%, #FF61E5 100%);
-            --text: #F5F5FA;
-            --card-bg: rgba(42, 42, 54, 0.8);
+            --primary: #ff6b00;
+            --dark: #1a1a1a;
+            --light: #f4f4f4;
         }
 
         body {
-            background: var(--primary);
-            color: var(--text);
+            background-color: var(--light);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
+        /* Header */
         .header {
-            padding: 1.5rem 5%;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 1rem;
             position: fixed;
             width: 100%;
-            top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
         }
 
         .nav-links {
@@ -56,149 +57,191 @@
         }
 
         .nav-links a {
-            color: var(--text);
+            color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-            position: relative;
+            transition: color 0.3s;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: 0.3s;
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
+        /* Hero Section */
         .hero {
-            height: 100vh;
+            padding-top: 120px;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
             display: flex;
             align-items: center;
-            padding: 0 5%;
-            margin-top: 80px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url('https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?auto=format&fit=crop&w=1920') center/cover;
+            justify-content: center;
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 800px;
+            padding: 2rem;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
         }
 
         .cta-button {
-            padding: 1rem 2rem;
-            background: var(--gradient);
-            border: none;
-            border-radius: 8px;
+            background: var(--primary);
             color: white;
-            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s;
-            text-decoration: none;
-            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,107,0,0.4);
         }
 
-        .featured-section {
-            padding: 5rem 5%;
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: white;
         }
 
         .section-title {
-            font-size: 2rem;
+            text-align: center;
+            font-size: 2.5rem;
             margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            color: var(--dark);
         }
 
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 2px;
-            background: var(--gradient);
-        }
-
-        .grid-container {
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .manga-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
-            position: relative;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
 
-        .manga-card:hover {
-            transform: translateY(-5px);
+        .service-card:hover {
+            transform: translateY(-10px);
         }
 
-        .card-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-genres {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
             margin-bottom: 1rem;
         }
 
-        .genre-tag {
-            background: rgba(123, 97, 255, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        /* Features Section */
+        .features {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 2rem;
         }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-number {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* Footer */
         .footer {
-            background: var(--card-bg);
-            padding: 3rem 5%;
-            margin-top: 5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #111;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -208,145 +251,118 @@
                 font-size: 2.5rem;
             }
 
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .grid-container {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
 
-            .manga-card {
-                margin-bottom: 1.5rem;
-            }
-
-            .card-image {
-                height: 300px;
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
             }
-        }
 
-        .rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #FFD700;
-            margin-top: 1rem;
-        }
-
-        .loader {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="logo">MangaFlow</div>
-        <nav class="nav-links">
-            <a href="#home">Главная</a>
-            <a href="#catalog">Каталог</a>
-            <a href="#new">Новинки</a>
-            <a href="#collections">Подборки</a>
+        <nav class="nav-container">
+            <div class="logo">AUTO<span style="color: white;">PRO</span></div>
+            <div class="nav-links">
+                <a href="#services">Услуги</a>
+                <a href="#about">О нас</a>
+                <a href="#gallery">Галерея</a>
+                <a href="#contact">Контакты</a>
+            </div>
         </nav>
-        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </header>
 
     <section class="hero">
-        <div class="hero-content loader">
-            <h1>Погрузитесь в мир захватывающих историй</h1>
-            <p>Тысячи манги и манхвы в отличном качестве. Читайте новые главы сразу после выхода!</p>
-            <a href="#catalog" class="cta-button">Начать чтение</a>
+        <div class="hero-content">
+            <h1>Профессиональный кузовной ремонт</h1>
+            <p>Высококачественные услуги по ремонту и покраске автомобилей с гарантией результата</p>
+            <button class="cta-button">Записаться онлайн</button>
         </div>
     </section>
 
-    <section class="featured-section">
-        <h2 class="section-title">Популярные сейчас</h2>
-        <div class="grid-container">
-            <div class="manga-card loader">
-                <img src="https://images-s.kinorium.com/movie/poster/8663323/w1500_53719444.jpg" alt="Manga Cover" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Соло Левел Ап</h3>
-                    <div class="card-genres">
-                        <span class="genre-tag">Боевик</span>
-                        <span class="genre-tag">Фэнтези</span>
-                        <span class="genre-tag">Драма</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <span>4.9 (15k)</span>
-                    </div>
-                </div>
+    <section class="services" id="services">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-car-crash service-icon"></i>
+                <h3>Кузовной ремонт</h3>
+                <p>Полное восстановление геометрии кузова после ДТП с использованием оригинальных запчастей</p>
             </div>
-            <!-- Добавьте больше карточек по аналогии -->
+            <div class="service-card">
+                <i class="fas fa-paint-roller service-icon"></i>
+                <h3>Покраска автомобиля</h3>
+                <p>Профессиональная покраска в камере с компьютерным подбором цвета</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tools service-icon"></i>
+                <h3>Замена стекол</h3>
+                <p>Качественная замена лобовых и боковых стекол с гарантией герметичности</p>
+            </div>
         </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-number">15+</div>
+                <h4>Лет опыта</h4>
+                <p>Профессиональной работы с автомобилями</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-number">5000+</div>
+                <h4>Успешных ремонтов</h4>
+                <p>Выполненных с безупречным качеством</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-number">24/7</div>
+                <h4>Поддержка</h4>
+                <p>Круглосуточная помощь нашим клиентам</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Наши работы</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')"></div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="section-title">Контакты</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Ваше имя">
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Ваш email">
+            </div>
+            <div class="form-group">
+                <textarea rows="5" placeholder="Сообщение"></textarea>
+            </div>
+            <button class="cta-button">Отправить</button>
+        </form>
     </section>
 
     <footer class="footer">
-        <div class="grid-container">
-            <div>
-                <h4>MangaFlow</h4>
-                <p>© 2024 Все права защищены</p>
-            </div>
-            <div>
-                <h4>Соцсети</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-vk"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
-                </div>
-            </div>
-        </div>
+        <p>© 2024 AutoPro. Все права защищены</p>
+        <p>Телефон: +7 (999) 123-45-67</p>
+        <p>Адрес: г. Москва, ул. Автозаводская, д. 15</p>
     </footer>
-
-    <script>
-        // Мобильное меню
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Плавная прокрутка
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Анимация при скролле
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('loader');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.manga-card, .hero-content').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
